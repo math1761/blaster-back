@@ -3,7 +3,10 @@
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",
-    { "language": "typescript", "autoFix": true }
+    {
+      "language": "typescript",
+      "autoFix": true
+    }
   ],
   "editor.formatOnSave": true,
   "[javascript]": {
