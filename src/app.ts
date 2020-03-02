@@ -1,26 +1,31 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
+import {Sequelize} from 'sequelize';
 import passport from "passport";
 import helmet from "helmet";
 import cors from 'cors';
-import {MONGODB_URI} from "./util/secrets";
 
 // Controllers (route handlers)
 import * as apiController from "./controllers/api";
-import logger from "./util/logger";
 
 // Create Express server
 export const app = express();
 
-// Connect to MongoDB
-const mongoUrl = MONGODB_URI;
-
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true } ).then(
-    () => { logger.info('MongoDB: Connected to blastar database'); },
-).catch(err => {
-    console.log("MongoDB connection error. Please make sure MongoDB is running. " + err);
+const sequelize = new Sequelize(process.env.DB_NAME, 'math1761', '', {
+    host: 'localhost',
+    dialect: 'postgres'
 });
+
+app.set('sequelize', sequelize);
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log(`Connection to ${process.env.DB_NAME} has been established successfully.`);
+  })
+  .catch((err: string) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.use(helmet());
 app.use(bodyParser.json());

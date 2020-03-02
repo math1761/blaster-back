@@ -1,16 +1,10 @@
-import mongoose from "mongoose";
+import app from '../app';
+import Sequelize from 'sequelize';
+import {Room} from './Room.model';
 
-export type UserDocument = mongoose.Document & {
-    name: string;
-};
-
-export interface AuthToken {
-    accessToken: string;
-    kind: string;
-}
-
-const userSchema = new mongoose.Schema({
-    names: Array
-}, { timestamps: true });
-
-export const User = mongoose.model<UserDocument>("User", userSchema);
+const sequelize = app.get('sequelize');
+export const User = sequelize.define('user', {
+    names: {
+      type: Sequelize.ARRAY(Sequelize.STRING)
+    }
+});

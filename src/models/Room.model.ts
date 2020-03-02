@@ -1,14 +1,12 @@
-import mongoose from "mongoose";
+import app from '../app';
+import Sequelize from 'sequelize';
+import {User} from './User.model';
 
-export type RoomDocument = mongoose.Document & {
-    name: string;
-};
-
-const roomSchema = new mongoose.Schema({
-    users: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+const sequelize = app.get('sequelize');
+export const Room = sequelize.define('room', {
+    names: {
+        type: Sequelize.STRING
     }
-}, { timestamps: true });
+});
 
-export const Room = mongoose.model<RoomDocument>("Room", roomSchema);
+Room.hasMany(User, {foreignKey: 'uid'});
