@@ -1,8 +1,6 @@
 import app from "./app";
-import {Room} from './models/Room.model';
-import logger from './util/logger';
 
-const server = require('http').createServer(app);
+const server = require('http').Server(app);
 const io = require('socket.io')(server, {
     handlePreflightRequest: (_:any, res:any) => {
         const headers = {
@@ -13,6 +11,10 @@ const io = require('socket.io')(server, {
         res.writeHead(200, headers);
         res.end();
     }});
+
+app.set("io", io);
+require('./sockets/index');
+
 /**
  * Start Express server.
  */
@@ -22,23 +24,5 @@ server.listen(1234, () => {
         console.log(" Press CTRL-C to stop\n");
     }
 });
-
-app.set("io", io);
-
-io.on('connection', async (_: any) => {
-    const id = (Math.round(Math.random() * 10)).toString(10);
-    const newRoom = await Room.create({name: id});
-
-    await logger.info(`io: REQUEST_ROOM_ID -> id : ${newRoom.id}`);
-    await logger.warn(newRoom.id);
-    console.log('coucou');
-    io.emit('GET_ROOM_ID', {
-        type: 'ROOM_ID',
-        data: {
-            id: newRoom.id
-        }
-    });
-});
-
 
 export default server;

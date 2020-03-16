@@ -3,24 +3,28 @@ import {namespaces} from './namespaces';
 import logger from '../util/logger';
 import {Room} from '../models/Room.model';
 
-const io = app.get('io');
+export const roomSocketEvents = () => {
+    const io = app.get('io');
 
-const room = io.of(namespaces.room);
+    const roomSocket = io.of(namespaces.room);
+    let roomId = 0;
 
-room.on('connection', () => {
-    console.log('coucou !');
-    room.on("REQUEST_ROOM_ID", async (room: any) => {
-        const id = (Math.round(Math.random() * 10)).toString(10);
-        const newRoom = await Room.create({name: id});
-    
-        await logger.info(`io: REQUEST_ROOM_ID -> id : ${newRoom.id}`);
-        await logger.warn(newRoom.id);
-    
-        io.emit('GET_ROOM_ID', {
-            type: 'ROOM_ID',
-            data: {
-                id: newRoom.id
-            }
+    roomSocket.on('connection', (socket: any) => {
+        console.info(`socket-io room: connected`);
+
+        socket.on('SOCKET/REQUEST_ROOM_ID', async () => {
+            roomId = Math.round(Math.random() * 10);
+            await new Room({roomId}).save();
+
+            logger.info(`io: REQUEST_ROOM_ID -> id : ${roomId}`);
+        
+            socket.broadcast.emit('SOCKET/GET_ROOM_ID', roomId);
+        });
+
+        socket.on('disconnect', async () => {
+            logger.info(`room: disconnected: REQUEST_ROOM_ID -> id : ${roomId}`);
+            await Room.deleteOne({roomId});
+            console.log('socket-io ');
         });
     });
-});
+}

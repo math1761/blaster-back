@@ -1,10 +1,9 @@
-import app from '../app';
-import Sequelize from 'sequelize';
-import {Room} from './Room.model';
+import mongoose from 'mongoose';
 
-const sequelize = app.get('sequelize');
-export const User = sequelize.define('user', {
+const UserSchema = new mongoose.Schema({
     names: {
-      type: Sequelize.ARRAY(Sequelize.STRING)
+        type: String,
+        required: false
     }
 });
+export const User = mongoose.model('room', UserSchema);

@@ -1,12 +1,9 @@
-import app from '../app';
-import Sequelize from 'sequelize';
-import {User} from './User.model';
+import mongoose from 'mongoose';
 
-const sequelize = app.get('sequelize');
-export const Room = sequelize.define('room', {
-    names: {
-        type: Sequelize.STRING
+const RoomSchema = new mongoose.Schema({
+    roomId: {
+        type: Number,
+        required: false
     }
 });
-
-Room.hasMany(User, {foreignKey: 'uid'});
+export const Room = mongoose.model('room', RoomSchema);

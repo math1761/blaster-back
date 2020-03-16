@@ -1,9 +1,0 @@
-{
-	"development": {
-		"username": "math1761",
-		"password": null,
-		"database": "blast",
-		"host": "127.0.0.1",
-		"dialect": "postgres"
-	}
-}
