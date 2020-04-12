@@ -22,10 +22,6 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: "http://localhost:3000"}));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-    res.locals.user = req.user;
-    next();
-});
 
 /**
  * Primary app routes.

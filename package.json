@@ -22,7 +22,6 @@
 		"debug": "npm run build && npm run watch-debug"
 	},
 	"dependencies": {
-		"@types/validator": "^12.0.1",
 		"body-parser": "1.19.0",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
@@ -31,8 +30,7 @@
 		"helmet": "^3.21.2",
 		"mongoose": "^5.8.11",
 		"ramda": "^0.27.0",
-		"socket.io": "^2.3.0",
-		"tslint": "^6.1.0"
+		"socket.io": "^2.3.0"
 	},
 	"devDependencies": {
 		"@types/body-parser": "^1.17.1",
@@ -46,9 +44,6 @@
 		"@types/jest": "25.1.1",
 		"@types/mongoose": "5.7.0",
 		"@types/node": "^12.7.8",
-		"@types/passport": "1.0.2",
-		"@types/passport-facebook": "2.1.9",
-		"@types/passport-local": "1.0.33",
 		"@types/ramda": "^0.27.3",
 		"@types/socket.io": "^2.1.4",
 		"@types/winston": "2.4.4",
@@ -57,10 +52,11 @@
 		"concurrently": "^4.1.2",
 		"eslint": "^6.4.0",
 		"jest": "25.1.0",
-		"nodemon": "^1.19.2",
+		"nodemon": "latest",
 		"ts-jest": "25.1.0",
 		"ts-node": "8.6.2",
 		"typescript": "^3.8.2",
-		"winston": "^3.2.1"
+		"winston": "^3.2.1",
+		"tslint": "^6.1.0"
 	}
 }
