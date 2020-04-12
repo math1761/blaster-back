@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import helmet from "helmet";
 import cors from 'cors';
 import mongoose from 'mongoose';
-
 // Controllers (route handlers)
 import * as apiController from "./controllers/api";
 import logger from "./util/logger";

@@ -1,3 +1,10 @@
 export const namespaces = {
     room: '/room'
 };
+
+export const events = {
+    REQUEST_ROOM_ID: 'SOCKET/REQUEST_ROOM_ID',
+    GET_ROOM_ID: 'SOCKET/GET_ROOM_ID',
+    IS_PSEUDO_AVAILABLE: 'SOCKET/IS_PSEUDO_AVAILABLE',
+    IS_PSEUDO_AVAILABLE_STATUS: 'SOCKET/IS_PSEUDO_AVAILABLE_STATUS'
+}
