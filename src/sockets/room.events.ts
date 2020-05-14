@@ -6,13 +6,13 @@ import {Room} from '../models/Room.model';
 import {User} from '../models/User.model';
 
 export const roomSocketEvents = () => {
-    const io = app.get('io');
+    const io = app.get("io");
 
     const roomSocket = io.of(namespaces.room);
     let roomId = 0;
 
-    roomSocket.on('connection', (socket: any) => {
-        console.info(`socket-io room: connected`);
+    roomSocket.on("connection", (socket: any) => {
+        console.info("socket-io room: connected");
 
         socket.on(events.REQUEST_ROOM_ID, async () => {
             roomId = Math.round(Math.random() * 10);
@@ -35,4 +35,4 @@ export const roomSocketEvents = () => {
             }
         });
     });
-}
+};
