@@ -1,0 +1,11 @@
+version: "2.2"
+
+services:
+  api:
+    build: .
+    image: blastar-back
+    ports:
+      - "7200:1234"
+    volumes:
+      - .:/usr/src/app/:rw
+    command: ["./config/docker/api.sh"]

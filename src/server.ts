@@ -1,6 +1,7 @@
 import app from "./app";
 
 const server = require("http").Server(app);
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const io = require("socket.io")(server, {
     handlePreflightRequest: (_: any, res: any) => {
         const headers = {
