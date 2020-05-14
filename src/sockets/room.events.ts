@@ -1,9 +1,9 @@
-import app from "../app";
-import {isNil} from "ramda";
-import {namespaces, events} from "./namespaces";
-import logger from "../util/logger";
-import {Room} from "../models/Room.model";
-import {User} from "../models/User.model";
+import app from '../app';
+import {isNil} from 'ramda';
+import {namespaces, events} from './namespaces';
+import logger from '../util/logger';
+import {Room} from '../models/Room.model';
+import {User} from '../models/User.model';
 
 export const roomSocketEvents = () => {
     const io = app.get("io");
@@ -28,7 +28,7 @@ export const roomSocketEvents = () => {
             isNil(user) && socket.broadcast.emit(events.IS_PSEUDO_AVAILABLE_STATUS, true);
         });
 
-        socket.on("disconnect", async () => {
+        socket.on('disconnect', async () => {
             if (roomId) {
                 logger.info(`room: disconnected: ${events.REQUEST_ROOM_ID} -> id : ${roomId}`);
                 await Room.deleteOne({roomId});
